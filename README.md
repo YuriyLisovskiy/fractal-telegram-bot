@@ -1,3 +1,3 @@
-# Fractal Bot
+# Telegram Fractal Bot
 
-### Created with help of [FRACTAL PYTHON RECIPES](https://code.activestate.com/recipes/langs/python/tags/fractal)
+### Implemented using [Fractal Python Algorithms](https://code.activestate.com/recipes/langs/python/tags/fractal)

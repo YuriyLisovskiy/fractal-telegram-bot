@@ -9,11 +9,11 @@ class ApollonianGasket:
 		self.name = name
 		self.img_x = x
 		self.img_y = y
-		self.image = Image.new("RGB", (x, y))
-		self.pixels = self.image.load()
 		self.max_iterations = max_iterations
 
 	def generate(self):
+		image = Image.new("RGB", (self.img_x, self.img_y))
+		pixels = image.load()
 		n = random.randint(3, 6)  # of main circles
 		a = math.pi * 2.0 / n
 		r = math.sin(a) / math.sin((math.pi - a) / 2.0) / 2.0  # r of main circles
@@ -44,7 +44,7 @@ class ApollonianGasket:
 			kx = int((self.img_x - 1) * (x - xa) / (xb - xa))
 			ky = int((self.img_y - 1) * (y - ya) / (yb - ya))
 			try:
-				self.pixels[kx, ky] = (255, 255, 255)
+				pixels[kx, ky] = (255, 255, 255)
 			except Exception as exc:
 				print(exc)
-		self.image.save(self.name, "PNG")
+		image.save(self.name, "PNG")

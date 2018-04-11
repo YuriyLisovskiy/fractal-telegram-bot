@@ -16,8 +16,6 @@ class MandelbrotSet:
 		self.__max_abs_y = 0.0
 		self.__max_abs_z = 0.0
 		self.__max_iterations = max_iterations
-		self.__image = Image.new("RGB", (x, y))
-		self.__pixels = self.__image.load()
 
 	def __find_max_values(self):
 		for ky in range(self.__img_y):
@@ -38,6 +36,8 @@ class MandelbrotSet:
 					self.__max_abs_z = abs(z)
 
 	def generate(self):
+		image = Image.new("RGB", (self.__img_x, self.__img_y))
+		pixels = image.load()
 		self.__find_max_values()
 		for ky in range(self.__img_y):
 			b = ky * (self.__yb - self.__ya) / (self.__img_y - 1) + self.__ya
@@ -58,5 +58,5 @@ class MandelbrotSet:
 				red = int(color__r_g_b / 65536)
 				green = int(color__r_g_b / 256) % 256
 				blue = color__r_g_b % 256
-				self.__pixels[kx, ky] = (red, green, blue)
-		self.__image.save(self.__name, "PNG")
+				pixels[kx, ky] = (red, green, blue)
+		image.save(self.__name, "PNG")
