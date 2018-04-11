@@ -5,7 +5,7 @@ from PIL import Image
 
 class ApollonianGasket:
 
-	def __init__(self, x=1024, y=1024, max_iterations=500, name='CircleInversionFractal.png'):
+	def __init__(self, x=512, y=512, max_iterations=256, name='CircleInversionFractal.png'):
 		self.name = name
 		self.img_x = x
 		self.img_y = y
