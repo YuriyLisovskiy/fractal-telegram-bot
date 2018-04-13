@@ -5,13 +5,13 @@ from PIL import Image
 
 class QuasiCrystal:
 
-	def __init__(self, x=512, y=512, name='quasi_crystal.png'):
+	def __init__(self, x=1024, y=1024):
 		self.img_x = x
 		self.img_y = y
-		self.name = name
+		self.name = 'QuasiCrystal.png'
 
 	def generate(self):
-		image = Image.new("RGB", (self.img_x, self.img_y))
+		image = Image.new('RGB', (self.img_x, self.img_y))
 		pixels = image.load()
 		f = random.random() * 40 + 10  # frequency
 		p = random.random() * math.pi  # phase

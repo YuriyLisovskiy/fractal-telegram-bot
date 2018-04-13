@@ -1,6 +1,6 @@
-from fractals.mandelbrot import MandelbrotSet
-from fractals.apollonian_gasket import ApollonianGasket
+from fractals.julia_set import JuliaSet
 from fractals.quasi_crystal import QuasiCrystal
+from fractals.lorenz_attractor import LorenzAttractor
 
 if __name__ == '__main__':
-	ApollonianGasket().generate()
+	LorenzAttractor().generate()

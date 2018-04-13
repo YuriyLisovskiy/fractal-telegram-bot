@@ -4,17 +4,19 @@ from PIL import Image
 
 class MandelbrotSet:
 
-	def __init__(self, x=800, y=800, max_iterations=500, name='MandelbrotFractal.png'):
+	def __init__(self, x=1024, y=1024, max_iterations=256):
+		if max_iterations > 256:
+			raise ValueError('invalid max iterations value')
 		self.__xb = 1.0
 		self.__yb = 1.5
 		self.__ya = -1.5
 		self.__xa = -2.0
 		self.__img_x = x
 		self.__img_y = y
-		self.__name = name
 		self.__max_abs_x = 0.0
 		self.__max_abs_y = 0.0
 		self.__max_abs_z = 0.0
+		self.__name = 'MandelbrotFractal.png'
 		self.__max_iterations = max_iterations
 
 	def __find_max_values(self):
@@ -36,7 +38,7 @@ class MandelbrotSet:
 					self.__max_abs_z = abs(z)
 
 	def generate(self):
-		image = Image.new("RGB", (self.__img_x, self.__img_y))
+		image = Image.new('RGB', (self.__img_x, self.__img_y))
 		pixels = image.load()
 		self.__find_max_values()
 		for ky in range(self.__img_y):
@@ -58,5 +60,8 @@ class MandelbrotSet:
 				red = int(color__r_g_b / 65536)
 				green = int(color__r_g_b / 256) % 256
 				blue = color__r_g_b % 256
+				# red = (color__r_g_b % 8) * 32
+				# green = (16 - color__r_g_b % 16) * 16
+				# blue = (color__r_g_b % 16) * 16
 				pixels[kx, ky] = (red, green, blue)
-		image.save(self.__name, "PNG")
+		image.save(self.__name, 'PNG')
