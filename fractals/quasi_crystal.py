@@ -11,6 +11,7 @@ class QuasiCrystal:
 		self.name = 'QuasiCrystal.png'
 
 	def generate(self):
+		print('Generating {}, please wait...'.format(self.name))
 		image = Image.new('RGB', (self.img_x, self.img_y))
 		pixels = image.load()
 		f = random.random() * 40 + 10  # frequency
@@ -28,3 +29,4 @@ class QuasiCrystal:
 				c = int(round(255 * z / n))
 				pixels[kx, ky] = (c, c, c)  # gray scale
 		image.save(self.name, 'PNG')
+		return self.name

@@ -25,22 +25,24 @@ class LorenzAttractor:
 		return x, y, z
 
 	def generate(self):
-			image = Image.new('RGB', (self.x, self.y))
-			size = 30
-			xa = -size
-			xb = size
-			ya = -size
-			yb = size
-			x = random.random() * size * 2 - 1
-			y = random.random() * size * 2 - 1
-			z = random.random() * size * 2 - 1
-			# dx/dt = delta * (y - x)
-			# dy/dt = r * x - y - x * z
-			# dz/dt = x * y - b * z
-			for i in range(self.max_iterations):
-				(x, y, z) = self.lorenz(x, y, z)
-				xi = int((self.x - 1) * (x - xa) / (xb - xa))
-				yi = int((self.y - 1) * (y - ya) / (yb - ya))
-				if 0 <= xi < self.x and 0 <= yi < self.y:
-					image.putpixel((xi, yi), (255, 255, 255))
-			image.save(self.name, 'PNG')
+		print('Generating {}, please wait...'.format(self.name))
+		image = Image.new('RGB', (self.x, self.y))
+		size = 30
+		xa = -size
+		xb = size
+		ya = -size
+		yb = size
+		x = random.random() * size * 2 - 1
+		y = random.random() * size * 2 - 1
+		z = random.random() * size * 2 - 1
+		# dx/dt = delta * (y - x)
+		# dy/dt = r * x - y - x * z
+		# dz/dt = x * y - b * z
+		for i in range(self.max_iterations):
+			(x, y, z) = self.lorenz(x, y, z)
+			xi = int((self.x - 1) * (x - xa) / (xb - xa))
+			yi = int((self.y - 1) * (y - ya) / (yb - ya))
+			if 0 <= xi < self.x and 0 <= yi < self.y:
+				image.putpixel((xi, yi), (255, 255, 255))
+		image.save(self.name, 'PNG')
+		return self.name

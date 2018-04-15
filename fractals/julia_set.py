@@ -10,6 +10,7 @@ class JuliaSet:
 		self.name = 'JuliaSetFractal.png'
 
 	def generate(self):
+		print('Generating {}, please wait...'.format(self.name))
 		image = Image.new('RGB', (self.x, self.y))
 		xa = -2.0
 		xb = 2.0
@@ -42,3 +43,4 @@ class JuliaSet:
 					z = z * z + c
 				image.putpixel((x, y), (i % 8 * 32, i % 16 * 16, i % 32 * 8))
 		image.save(self.name, 'PNG')
+		return self.name

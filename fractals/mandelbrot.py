@@ -38,6 +38,7 @@ class MandelbrotSet:
 					self.__max_abs_z = abs(z)
 
 	def generate(self):
+		print('Generating {}, please wait...'.format(self.__name))
 		image = Image.new('RGB', (self.__img_x, self.__img_y))
 		pixels = image.load()
 		self.__find_max_values()
@@ -65,3 +66,4 @@ class MandelbrotSet:
 				# blue = (color__r_g_b % 16) * 16
 				pixels[kx, ky] = (red, green, blue)
 		image.save(self.__name, 'PNG')
+		return self.__name

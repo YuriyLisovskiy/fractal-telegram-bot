@@ -6,6 +6,7 @@ from .settings import *
 from .text_answers import *
 from datetime import timedelta
 from utils.decorators import run_async
+from fractals import julia_set, lorenz_attractor, quasi_crystal, mandelbrot
 
 
 class Bot:
@@ -170,6 +171,37 @@ class Bot:
 		get_result = self.__get_updates()
 		return get_result[-1] if len(get_result) > 0 else None
 
+	@staticmethod
+	def __remove_file(path):
+		if os.path.exists(path):
+			os.remove(path)
+
+	def __send_fractal(self, command, chat_id):
+		data = {
+			'chat_id': chat_id
+		}
+		fractal_generator = None
+		if command == COMMAND_JULIA:
+			fractal_generator = julia_set.JuliaSet()
+		elif command == COMMAND_LORENZ:
+			fractal_generator = lorenz_attractor.LorenzAttractor()
+		elif command == COMMAND_QUASI_CRYSTAL:
+			fractal_generator = quasi_crystal.QuasiCrystal()
+		elif command == COMMAND_MANDELBROT:
+			fractal_generator = mandelbrot.MandelbrotSet()
+		if fractal_generator:
+			data['text'] = 'Generating \'{}\'.\nIt can take a few minutes, please wait...'.format(command[1:])
+			self.__send_message(**data)
+			del data['text']
+			file_name = fractal_generator.generate()
+			data['photo'] = open(file_name, 'rb')
+			self.__send_photo(**data)
+			if file_name:
+				self.__remove_file(file_name)
+			return True
+		return False
+
+	@run_async
 	def __serve_user(self, command, chat_id, username):
 		data = {
 			'chat_id': chat_id
@@ -179,6 +211,9 @@ class Bot:
 			data['text'] = START.format(username, username)
 		elif command == COMMAND_HELP:
 			data['text'] = HELP
+		elif command in AVAILABLE_FRACTALS:
+			if self.__send_fractal(command, chat_id):
+				return
 		else:
-			data['text'] = 'Sorry, this is beta version of Fractal Bot'
+			data['text'] = INVALID_COMMAND
 		return self.__send_message(**data)

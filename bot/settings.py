@@ -32,3 +32,10 @@ RESPONSE_FAILED = '{} response failed, time: {}'
 COMMAND_START = '/start'
 COMMAND_HELP = '/help'
 COMMAND_BUG = '/bug'
+
+COMMAND_JULIA = '/juliaset'
+COMMAND_LORENZ = '/lorenzattractor'
+COMMAND_MANDELBROT = '/mandelbrotset'
+COMMAND_QUASI_CRYSTAL = '/quasicrystal'
+
+AVAILABLE_FRACTALS = [COMMAND_JULIA, COMMAND_LORENZ, COMMAND_MANDELBROT, COMMAND_QUASI_CRYSTAL]
